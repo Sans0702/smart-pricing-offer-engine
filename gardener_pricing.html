@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Pricing & Offer Optimization Engine | Gardener Service</title>
+  <meta name="description" content="AI-driven dynamic pricing, discount effectiveness prediction, and offer recommendation engine for professional gardening services.">
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="gardener_pricing.css">
+</head>
+<body>
+  <div class="app-background">
+    <div class="bg-glow blob-1"></div>
+    <div class="bg-glow blob-2"></div>
+    <div class="bg-glow blob-3"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-icon">🌱</div>
+        <div>
+          <h1>Smart Pricing & Offer Engine</h1>
+          <p class="subtitle">Gardener Service Revenue & Discount Optimization Suite</p>
+        </div>
+      </div>
+      <div class="header-badges">
+        <span class="badge badge-pulse"><span class="pulse-dot"></span> Live Engine</span>
+        <span class="badge badge-accent">Base Rate: ₹500</span>
+      </div>
+    </header>
+
+    <!-- Preset Scenario Selector -->
+    <section class="scenarios-bar">
+      <span class="scenarios-label">⚡ Quick Scenarios:</span>
+      <div class="scenario-buttons">
+        <button class="preset-btn active" data-preset="userExample">📍 User Example (Urban / Summer)</button>
+        <button class="preset-btn" data-preset="peakSummer">☀️ Peak Summer Surge</button>
+        <button class="preset-btn" data-preset="monsoonRural">🌧️ Monsoon Rural Discount</button>
+        <button class="preset-btn" data-preset="winterLowDemand">❄️ Winter Slump Boost</button>
+        <button class="preset-btn" data-preset="heavyCompetition">⚔️ High Competitor Pressure</button>
+      </div>
+    </section>
+
+    <!-- Main Grid Dashboard -->
+    <main class="dashboard-grid">
+      
+      <!-- Control Panel (Left Column) -->
+      <section class="card input-card">
+        <div class="card-header">
+          <h2>🎛️ Input Parameters</h2>
+          <button class="btn-text" id="resetInputsBtn">Reset Defaults</button>
+        </div>
+
+        <form id="pricingForm" onsubmit="return false;">
+          
+          <!-- Base Price -->
+          <div class="form-group">
+            <label for="basePriceInput">Base Service Price (₹)</label>
+            <div class="input-with-symbol">
+              <span class="currency-symbol">₹</span>
+              <input type="number" id="basePriceInput" value="500" min="50" step="10" required>
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="form-group">
+            <label>Service Location</label>
+            <div class="radio-grid" id="locationGroup">
+              <label class="radio-card">
+                <input type="radio" name="location" value="urban" checked>
+                <div class="radio-content">
+                  <span class="radio-icon">🏙️</span>
+                  <span class="radio-title">Urban</span>
+                  <span class="radio-sub">1.2x Multiplier</span>
+                </div>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="location" value="semiUrban">
+                <div class="radio-content">
+                  <span class="radio-icon">🏡</span>
+                  <span class="radio-title">Semi-Urban</span>
+                  <span class="radio-sub">1.0x Multiplier</span>
+                </div>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="location" value="rural">
+                <div class="radio-content">
+                  <span class="radio-icon">🌾</span>
+                  <span class="radio-title">Rural</span>
+                  <span class="radio-sub">0.8x Multiplier</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Demand Level -->
+          <div class="form-group">
+            <label>Customer Demand</label>
+            <div class="radio-grid" id="demandGroup">
+              <label class="radio-card">
+                <input type="radio" name="demand" value="high">
+                <div class="radio-content">
+                  <span class="radio-icon">🔥</span>
+                  <span class="radio-title">High</span>
+                  <span class="radio-sub">1.25x Multiplier</span>
+                </div>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="demand" value="medium" checked>
+                <div class="radio-content">
+                  <span class="radio-icon">⚖️</span>
+                  <span class="radio-title">Medium</span>
+                  <span class="radio-sub">1.00x Multiplier</span>
+                </div>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="demand" value="low">
+                <div class="radio-content">
+                  <span class="radio-icon">🧊</span>
+                  <span class="radio-title">Low</span>
+                  <span class="radio-sub">0.85x Multiplier</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Season -->
+          <div class="form-group">
+            <label>Season</label>
+            <div class="radio-grid" id="seasonGroup">
+              <label class="radio-card">
+                <input type="radio" name="season" value="summer" checked>
+                <div class="radio-content">
+                  <span class="radio-icon">☀️</span>
+                  <span class="radio-title">Summer</span>
+                  <span class="radio-sub">1.3x Multiplier</span>
+                </div>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="season" value="monsoon">
+                <div class="radio-content">
+                  <span class="radio-icon">🌧️</span>
+                  <span class="radio-title">Monsoon</span>
+                  <span class="radio-sub">1.1x Multiplier</span>
+                </div>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="season" value="winter">
+                <div class="radio-content">
+                  <span class="radio-icon">❄️</span>
+                  <span class="radio-title">Winter</span>
+                  <span class="radio-sub">0.9x Multiplier</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Competitor Price & Discount Sliders -->
+          <div class="sliders-grid">
+            <div class="form-group">
+              <div class="slider-header">
+                <label for="competitorRange">Competitor Price</label>
+                <span class="slider-val" id="competitorValDisplay">₹480</span>
+              </div>
+              <input type="range" id="competitorRange" min="200" max="1000" step="10" value="480">
+              <span class="field-hint" id="competitorHint">Under Base Price (&lt; ₹500) &rarr; 0.95x Adj</span>
+            </div>
+
+            <div class="form-group">
+              <div class="slider-header">
+                <label for="discountRange">Discount Offered</label>
+                <span class="slider-val" id="discountValDisplay">20%</span>
+              </div>
+              <input type="range" id="discountRange" min="0" max="50" step="1" value="20">
+              <span class="field-hint" id="discountHint">Effectiveness predictor target</span>
+            </div>
+          </div>
+
+        </form>
+      </section>
+
+      <!-- Output Results Panel (Right Column) -->
+      <section class="output-column">
+        
+        <!-- Optimal Price Hero Card -->
+        <div class="card hero-price-card">
+          <div class="hero-header">
+            <span class="hero-label">OPTIMAL CALCULATED PRICE</span>
+            <span class="badge badge-success" id="priceDeltaBadge">+48.2% vs Base</span>
+          </div>
+          
+          <div class="price-display">
+            <span class="currency">₹</span>
+            <span class="price-val" id="optimalPriceDisplay">741</span>
+            <span class="price-unit">/ session</span>
+          </div>
+
+          <!-- Price Formula Multipliers Pill Breakdown -->
+          <div class="multipliers-bar" id="multipliersBar">
+            <div class="mult-chip" id="chipBase">Base: ₹500</div>
+            <span class="mult-sep">&times;</span>
+            <div class="mult-chip" id="chipLoc">Loc: 1.2x</div>
+            <span class="mult-sep">&times;</span>
+            <div class="mult-chip" id="chipDemand">Demand: 1.0x</div>
+            <span class="mult-sep">&times;</span>
+            <div class="mult-chip" id="chipSeason">Season: 1.3x</div>
+            <span class="mult-sep">&times;</span>
+            <div class="mult-chip" id="chipComp">Comp: 0.95x</div>
+          </div>
+        </div>
+
+        <!-- Offers & Predictive Intelligence Grid -->
+        <div class="intelligence-grid">
+          
+          <!-- Discount Impact Card -->
+          <div class="card intel-card">
+            <div class="intel-header">
+              <span class="intel-icon">📈</span>
+              <h3>Discount Effectiveness</h3>
+            </div>
+            <div class="impact-badge-container">
+              <div class="impact-badge" id="impactBadge">Moderate Impact</div>
+              <p class="impact-desc" id="impactDesc">20% discount paired with medium demand yields balanced conversion without margin erosion.</p>
+            </div>
+            <div class="gauge-bar">
+              <div class="gauge-fill" id="gaugeFill"></div>
+            </div>
+          </div>
+
+          <!-- Recommended Offer Card -->
+          <div class="card intel-card offer-card">
+            <div class="intel-header">
+              <span class="intel-icon">🎁</span>
+              <h3>Recommended Offer</h3>
+            </div>
+            <div class="offer-box">
+              <div class="offer-icon-large">🏷️</div>
+              <div class="offer-title" id="recommendedOfferTitle">Free lawn trimming with booking</div>
+              <span class="offer-rule" id="offerRuleReason">Triggered by Summer Season rule</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Revenue Analytics & Profit Projections -->
+        <div class="card analytics-card">
+          <div class="card-header">
+            <h3>📊 Financial & Conversion Impact Forecast</h3>
+            <span class="badge badge-neutral">Estimated Metrics</span>
+          </div>
+
+          <div class="metrics-grid">
+            <div class="metric-box">
+              <span class="metric-label">Estimated Gross Revenue / 100 Jobs</span>
+              <span class="metric-val" id="grossRevenueVal">₹74,100</span>
+            </div>
+            <div class="metric-box">
+              <span class="metric-label">Est. Labor & Material Cost</span>
+              <span class="metric-val" id="estimatedCostVal">₹320 / job</span>
+            </div>
+            <div class="metric-box highlight">
+              <span class="metric-label">Net Profit Margin</span>
+              <span class="metric-val text-success" id="netProfitVal">56.8%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code & JSON Debugger Container -->
+        <div class="card json-card">
+          <div class="card-header">
+            <div class="tab-buttons">
+              <button class="tab-btn active" data-tab="json">JSON Engine Output</button>
+              <button class="tab-btn" data-tab="code">JavaScript Engine Code</button>
+            </div>
+            <button class="btn-copy" id="copyJsonBtn">📋 Copy Output</button>
+          </div>
+
+          <div class="code-view" id="jsonView">
+            <pre><code id="jsonCodeBlock"></code></pre>
+          </div>
+
+          <div class="code-view hidden" id="codeView">
+            <pre><code id="jsEngineCodeBlock"></code></pre>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Leaf & Lawn AI Pricing System &bull; Designed for Maximum Service Revenue & Customer Retention</p>
+    </footer>
+  </div>
+
+  <script src="gardener_pricing.js"></script>
+</body>
+</html>
